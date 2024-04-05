@@ -195,6 +195,23 @@ input,
   border-radius: 0.3rem;
 }
 
+.removed-button:hover {
+  box-shadow: 0.08rem 0.08rem rgb(0, 0, 0) !important;
+  transform: translate(0.01rem, 0.01rem);
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
+  animation: remove 1s alternate 10;
+}
+
+@keyframes remove {
+  0% {
+  }
+  100% {
+    color: #282c34;
+    background-color: #f02121 !important;
+  }
+}
+
 .added-button:hover {
   background-color: #f09e21 !important;
   box-shadow: 0.08rem 0.08rem rgb(0, 0, 0) !important;

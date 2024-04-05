@@ -4,17 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {
-  const initialList = [
-    {
-      name: "Fasting",
-      oxalate: false,
-      vitaminA: false,
-      fodmap: false,
-      gluten: false,
-      meat: "other",
-    },
-  ];
-
   const initialContents = [
     { "high oxalate": ["🔹", -15] },
     { "high vitamin a": ["🅰️", -15] },
@@ -29,8 +18,30 @@ function App() {
     },
   ];
 
+  const initialList = [
+    {
+      name: "FASTING",
+      oxalate: false,
+      vitaminA: false,
+      fodmap: false,
+      gluten: false,
+      meat: "other",
+    },
+  ];
+
+  const [mealName, setMealName] = useState("");
   const [list, setList] = useState(initialList);
   const [contents, setContents] = useState(initialContents);
+
+  function handleMealName(e) {
+    setMealName(e.target.value);
+  }
+
+  function handleAddMeal() {
+    setList([...list, { name: mealName.trim().toUpperCase() }]);
+    setMealName("");
+  }
+
   return (
     <Container
       className="p-2 mt-5 pb-5"
@@ -47,6 +58,8 @@ function App() {
         <input
           className="mt-2 mb-2 p-1 inputText"
           placeholder="Meal Name"
+          onChange={handleMealName}
+          value={mealName}
         ></input>
         <div className="d-flex justify-content-between mb-2">
           <div className="d-flex gap-1" style={{ width: "15rem" }}>
@@ -86,6 +99,19 @@ function App() {
             </p>
           </div>
           <Button
+            className="btn-sm mt-2 mb-2 pb-2 align-self-center removed-button"
+            style={{
+              borderRadius: "3rem",
+              height: "2rem",
+              background: "rgb(100,20,20)",
+              border: "solid red 0.1rem",
+              boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
+              transform: "translateX(-0.5rem)",
+            }}
+          >
+            <b>-</b>
+          </Button>
+          <Button
             className="btn-sm mt-2 mb-2 pb-2 align-self-center added-button"
             style={{
               borderRadius: "3rem",
@@ -93,6 +119,7 @@ function App() {
               background: "#f29102",
               border: "none",
               boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
+              transform: "translateX(-0.2rem)",
             }}
           >
             <b>+</b>
@@ -116,13 +143,19 @@ function App() {
                       <input
                         className="checkbox"
                         type="checkbox"
-                        id="prop"
+                        id={prop.trim()}
                       ></input>
-                      <label htmlFor="prop">
+                      <label htmlFor={prop.trim()}>
                         {prop.trim().toLocaleUpperCase()}
                       </label>
                     </div>
-                    <div>{c[prop].length ? c[prop] : prop[0]}</div>
+                    <div>
+                      {c[prop][0].length
+                        ? c[prop][0]
+                        : `(${prop.trim()[0]}${
+                            prop.trim()[prop.trim().length - 1]
+                          })`}
+                    </div>
                   </div>
                 );
             } else {
@@ -148,7 +181,25 @@ function App() {
                   </section>
                   <section>
                     {Object.values(c).map((vc, i) => {
-                      return <div key={i}>{vc}</div>;
+                      return (
+                        <div key={i}>
+                          <div>
+                            {vc[0].length
+                              ? vc[0]
+                              : Object.keys(c)[i].trim().indexOf(" ") > -1
+                              ? `(${Object.keys(c)[i][0]}${
+                                  Object.keys(c)[i][
+                                    Object.keys(c)[i].trim().indexOf(" ") + 1
+                                  ]
+                                })`
+                              : `(${Object.keys(c)[i][0]}${
+                                  Object.keys(c)[i][
+                                    Object.keys(c)[i].length - 1
+                                  ]
+                                })`}
+                          </div>
+                        </div>
+                      );
                     })}
                   </section>
                 </div>
@@ -156,17 +207,33 @@ function App() {
             }
           })}
         </Container>
-        <Button
-          className="btn-sm mt-2 mb-3 added-button"
-          style={{
-            background: "#f29102",
-            border: "none",
-            textShadow: "0.1rem 0.1rem #995c00",
-            boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
-          }}
-        >
-          <b>ADD MEAL</b>
-        </Button>
+        {mealName.length > 0 ? (
+          <Button
+            className="btn-sm mt-2 mb-3 added-button"
+            style={{
+              background: "#f29102",
+              border: "none",
+              textShadow: "0.1rem 0.1rem #995c00",
+              boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
+            }}
+            onClick={handleAddMeal}
+          >
+            <b>ADD MEAL</b>
+          </Button>
+        ) : (
+          <Button
+            className="btn-sm mt-2 mb-3 added-button"
+            style={{
+              background: "transparent",
+              border: "none",
+              textShadow: "0.1rem 0.1rem #995c00",
+              boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
+            }}
+            disabled
+          >
+            <b>ADD MEAL</b>
+          </Button>
+        )}
       </Container>
       <Container
         className="d-flex flex-column mt-5 criteria"
