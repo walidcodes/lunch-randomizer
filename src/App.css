@@ -36,3 +36,177 @@
     transform: rotate(360deg);
   }
 }
+
+h2 {
+  font-variant: small-caps;
+  text-shadow: 0.05rem 0.05rem rgb(40, 40, 40);
+  box-shadow: -0.1rem -0.1rem 0rem 0.1rem rgb(40, 40, 40),
+    0.0001rem 0.0001rem 0rem 0.1rem rgb(40, 40, 40);
+  border-radius: 0.4rem;
+}
+
+.inputText {
+  background-color: #323232;
+  text-align: center;
+  color: #edab48;
+  text-transform: uppercase;
+  text-shadow: 0.1rem 0.1rem rgb(0, 0, 0);
+  box-shadow: 0.1rem 0.1rem rgb(40, 40, 40);
+  border-radius: 0.4rem;
+}
+
+input::placeholder {
+  color: #ffe45d;
+  opacity: 0.55;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.ttc:hover::after {
+  content: "The criteria field takes in the name of a trait, ingredient or compound relating to the meal.";
+  position: absolute;
+  width: 16rem;
+  font-family: monospace;
+  background-color: #ececec;
+  border-radius: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  text-align: justify;
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    12% 100%,
+    12% 36%,
+    0 24%,
+    11% 12%,
+    12% 0
+  );
+  animation: ttc 0.5s forwards;
+  text-shadow: 0.3rem 0.3rem 0.5rem rgb(150, 150, 150);
+  border-top: solid rgb(100, 100, 100) 0.3rem;
+  border-right: solid rgb(100, 100, 100) 0.3rem;
+  border-bottom: solid rgb(100, 100, 100) 0.3rem;
+  border-left: solid rgb(100, 100, 100) 2.3rem;
+  transform: translate(1rem, -0.75rem);
+}
+.tte:hover::after {
+  content: "🔖 takes in up to two characters or emojis to help organise said trait or ingredient or compound.";
+  position: absolute;
+  width: 16rem;
+  font-family: monospace;
+  background-color: #ececec;
+  border-radius: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  text-align: justify;
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    12% 100%,
+    12% 36%,
+    0 24%,
+    11% 12%,
+    12% 0
+  );
+  animation: tte 0.5s forwards;
+  text-shadow: 0.3rem 0.3rem 0.5rem rgb(150, 150, 150);
+  border-top: solid rgb(100, 100, 100) 0.3rem;
+  border-right: solid rgb(100, 100, 100) 0.3rem;
+  border-bottom: solid rgb(100, 100, 100) 0.3rem;
+  border-left: solid rgb(100, 100, 100) 2.3rem;
+  transform: translate(1rem, -0.75rem);
+}
+.ttx:hover::after {
+  content: "✖️ takes in a number which serves as a multiplier to affect the chance of a meal coming up";
+  position: absolute;
+  width: 16rem;
+  font-family: monospace;
+  background-color: #ececec;
+  border-radius: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  text-align: justify;
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    12% 100%,
+    12% 36%,
+    0 24%,
+    11% 12%,
+    12% 0
+  );
+  animation: ttx 0.5s forwards;
+  text-shadow: 0.3rem 0.3rem 0.5rem rgb(150, 150, 150);
+  border-top: solid rgb(100, 100, 100) 0.3rem;
+  border-right: solid rgb(100, 100, 100) 0.3rem;
+  border-bottom: solid rgb(100, 100, 100) 0.3rem;
+  border-left: solid rgb(100, 100, 100) 2.3rem;
+  transform: translate(1rem, -0.75rem);
+}
+
+@keyframes ttc {
+  0% {
+    opacity: 0;
+    box-shadow: none;
+  }
+  100% {
+    z-index: 99;
+    opacity: 0.9;
+    transform: translate(0rem, -0.75rem);
+  }
+}
+@keyframes tte {
+  0% {
+    opacity: 0;
+    box-shadow: none;
+  }
+  100% {
+    z-index: 99;
+    opacity: 0.9;
+    transform: translate(0rem, -0.75rem);
+  }
+}
+@keyframes ttx {
+  0% {
+    opacity: 0;
+    box-shadow: none;
+  }
+  100% {
+    z-index: 99;
+    opacity: 0.9;
+    transform: translate(0rem, -0.75rem);
+  }
+}
+
+h2,
+label,
+input,
+.meal {
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.checkbox {
+  margin-right: 5px;
+  margin-left: 2px;
+}
+
+.criteria {
+  border: solid black 1px;
+  border-radius: 0.3rem;
+}
+
+.added-button:hover {
+  background-color: #f09e21 !important;
+  box-shadow: 0.08rem 0.08rem rgb(0, 0, 0) !important;
+  transform: translate(0.01rem, 0.01rem);
+  transition: 0.5s;
+}
+
+.delete-button {
+  height: 1.6rem;
+  transition: 0.2s;
+}
+.delete-button:hover {
+  transition: 1s;
+  background-color: brown !important;
+}
