@@ -248,27 +248,30 @@ function App() {
           return (
             <Container
               key={i}
-              className="d-flex align-items-center flex-column mt-1 mb-1 p-3"
+              className="d-flex align-items-center flex-column mt-1 mb-1 ps-3"
             >
+              <h2 className="text-center mt-2">​​​ ​</h2>
               <h5
-                className="meal text-center mb-2"
+                className="meal text-center mb-2 p-1"
                 style={{
                   width: "100%",
                   border: "solid black 0.1rem",
                   borderRadius: "0.4rem",
-                  background: "rgb(240,240,240)",
-                  textShadow: "0.05rem 0.05rem grey",
+                  background: "#323232",
+                  textShadow: "0.1rem 0.1rem black)",
+                  color: "#A09149",
                 }}
               >
                 {m.name}
               </h5>
-              <Container className="d-flex align-items-between flex-column-reverse m-0">
+              <Container className="d-flex align-items-between flex-column-reverse p-0 ">
                 <section>
                   <div
                     className="d-flex flex-row flex-wrap justify-content-between p-1"
                     style={{
                       background: "grey",
                       borderRadius: "0.4rem",
+                      boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
                     }}
                   >
                     {contents.map((c, contentIndex) => {
@@ -360,7 +363,10 @@ function App() {
                 </section>
                 <Button
                   className="btn-sm btn-outline-danger delete-button mb-2"
-                  style={{ background: "rgb(200,170,170)" }}
+                  style={{
+                    background: "rgb(200,170,170)",
+                    boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
+                  }}
                 >
                   <b>-</b>
                 </Button>
