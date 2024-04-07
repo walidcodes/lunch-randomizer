@@ -36,8 +36,6 @@ function App() {
     }
   }
 
-  console.log(list[0]);
-
   function handleMealName(e) {
     setMealName(e.target.value);
   }
@@ -49,15 +47,19 @@ function App() {
 
   return (
     <Container
-      className="p-2 mt-5 pb-5 d-flex"
+      className="p-2 mt-5 pb-5 d-flex align-items-start"
       style={{
         boxShadow: " 0 2px 0px #000, 0 2px 5px #000",
         borderRadius: "1rem",
+        height: "90vh",
       }}
     >
       <Container
         className="d-flex flex-column mt-5 criteria"
-        style={{ width: "17rem", boxShadow: "0.3rem 0.3rem rgb(70,70,70)" }}
+        style={{
+          width: "17rem",
+          boxShadow: "0.3rem 0.3rem rgb(70,70,70)",
+        }}
       >
         <h2 className="text-center mt-2">LUNCH PICKER</h2>
         <input
@@ -239,6 +241,9 @@ function App() {
             <b>ADD MEAL</b>
           </Button>
         )}
+        <Button className="btn-lg  mb-3 rando-button pt-2 pb-2">
+          <b>RANDOMISE</b>
+        </Button>
       </Container>
       <Container
         className="d-flex flex-column mt-5 criteria"
