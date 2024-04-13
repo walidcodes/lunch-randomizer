@@ -49,6 +49,7 @@ function App() {
   const [contentAmount, setContentAmount] = useState(0);
   const [list, setList] = useState(initialList);
   const [mealName, setMealName] = useState("");
+  const [contentName, setContentName] = useState("");
 
   for (let meal of list) {
     for (let content of contents) {
@@ -89,6 +90,17 @@ function App() {
     mealsArr.push(meal.name);
   });
 
+  const contentArr = [];
+  contents.forEach((content) => {
+    contentArr.push(Object.keys(content)[0]);
+  });
+
+  function handleContentFromChild(data) {
+    setContentName(data);
+    console.log(contentName);
+  }
+
+  console.log(contentArr);
   return (
     <Container className="p-2 mt-5 pb-5 d-flex align-items-start">
       <Container
@@ -142,7 +154,8 @@ function App() {
           >
             <b>-</b>
           </Button>
-          {typingContent === true ? (
+          {!contentArr.includes(contentName.trim().toLowerCase()) &&
+          typingContent === true ? (
             <Button
               className="btn-sm mt-2 mb-2 pb-2 align-self-stretch added-button"
               style={{
@@ -183,6 +196,7 @@ function App() {
                   <ContentInput
                     handleTypingContent={handleTypingContent}
                     typingContent={typingContent}
+                    contentFromChild={handleContentFromChild}
                   />
                 ))}
             </div>

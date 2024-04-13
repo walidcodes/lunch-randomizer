@@ -1,9 +1,14 @@
 import { useState } from "react";
 
-export function ContentInput({ handleTypingContent, typingContent }) {
+export function ContentInput({
+  handleTypingContent,
+  typingContent,
+  contentFromChild,
+}) {
   const [contentName, setContentName] = useState("");
 
   function handleContentName(e) {
+    contentFromChild(e.target.value);
     setContentName(e.target.value);
     if (e.target.value.length > 0 && !typingContent) {
       handleTypingContent();
@@ -151,14 +156,14 @@ export function MultiContent({ c, contentIndex, contents, radioed }) {
                   type="radio"
                   id={kc}
                   checked
-                  name={`c${contents[contentIndex]}}${randu}`}
+                  name={Object.keys(c).join()}
                 ></input>
               ) : (
                 <input
                   className="checkbox"
                   type="radio"
                   id={kc}
-                  name={`c${contents[contentIndex]}${randu}`}
+                  name={Object.keys(c).join()}
                 ></input>
               )}
 
