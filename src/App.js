@@ -25,8 +25,14 @@ function App() {
     { expensive: ["💲", -30, false] },
     {
       "red meat": ["🐄", -3, false],
-      "white meat": ["🐔", -3, false],
+      "white meat": ["🐔", -3, true],
       seafood: ["🐟", 12, false],
+      other: ["🌱", 0, false],
+    },
+    {
+      "red meat": ["🐄", -3, false],
+      "white meat": ["🐔", -3, true],
+      food: ["🐟", 12, false],
       other: ["🌱", 0, false],
     },
   ];
@@ -34,6 +40,7 @@ function App() {
   const initialList = [
     {
       name: "FASTING",
+      contents: [],
     },
   ];
 
@@ -56,7 +63,10 @@ function App() {
   }
 
   function handleAddMeal() {
-    setList([...list, { name: mealName.trim().toUpperCase() }]);
+    setList([
+      ...list,
+      { name: mealName.trim().toUpperCase(), contents: contents },
+    ]);
     setMealName("");
   }
 
@@ -191,12 +201,25 @@ function App() {
                     c={c}
                     prop={prop}
                     checked={c[prop][2]}
+                    checking={() =>
+                      setContents([
+                        ...contents.slice(0, contents.indexOf(c)),
+                        { ...c, [prop]: [c[prop][0], c[prop][1], !c[prop][2]] },
+                        ...contents.slice(contents.indexOf(c) + 1),
+                      ])
+                    }
                   />
                 );
             } else {
-              return (
-                <MultiContent key={contentIndex} c={c} contents={contents} />
-              );
+              for (let prop in c)
+                return (
+                  <MultiContent
+                    key={contentIndex}
+                    c={c}
+                    contents={contents}
+                    radioed={c[prop][2]}
+                  />
+                );
             }
           })}
         </Container>
@@ -269,7 +292,7 @@ function App() {
                       boxShadow: "0.1rem 0.1rem rgb(40, 40, 40)",
                     }}
                   >
-                    {contents.map((c, contentIndex) => {
+                    {m.contents.map((c, contentIndex) => {
                       if (Object.keys(c).length === 1) {
                         for (let prop in c)
                           return (
@@ -277,6 +300,33 @@ function App() {
                               key={prop}
                               c={c}
                               prop={prop}
+                              checkedInMeal={c[prop][2]}
+                              checkingInMeal={() =>
+                                setList([
+                                  ...list.slice(0, list.indexOf(m)),
+                                  {
+                                    name: m.name,
+                                    contents: [
+                                      ...m.contents.slice(
+                                        0,
+                                        m.contents.indexOf(c)
+                                      ),
+                                      {
+                                        ...c,
+                                        [prop]: [
+                                          c[prop][0],
+                                          c[prop][1],
+                                          !c[prop][2],
+                                        ],
+                                      },
+                                      ...m.contents.slice(
+                                        m.contents.indexOf(c) + 1
+                                      ),
+                                    ],
+                                  },
+                                  ...list.slice(list.indexOf(m) + 1),
+                                ])
+                              }
                             />
                           );
                       }

@@ -54,7 +54,7 @@ export function ContentInput({ handleTypingContent, typingContent }) {
   );
 }
 
-export function SingleContent({ c, prop, checked }) {
+export function SingleContent({ c, prop, checked, checking }) {
   return (
     <div
       key={prop}
@@ -66,11 +66,17 @@ export function SingleContent({ c, prop, checked }) {
           <input
             className="checkbox"
             type="checkbox"
-            checked="true"
+            checked
             id={prop.trim()}
+            onChange={checking}
           ></input>
         ) : (
-          <input className="checkbox" type="checkbox" id={prop.trim()}></input>
+          <input
+            className="checkbox"
+            type="checkbox"
+            onChange={checking}
+            id={prop.trim()}
+          ></input>
         )}
 
         <label htmlFor={prop.trim()}>{prop.trim().toLocaleUpperCase()}</label>
@@ -84,7 +90,13 @@ export function SingleContent({ c, prop, checked }) {
   );
 }
 
-export function TextlessSingleContent({ c, prop, checkedInMeal }) {
+export function TextlessSingleContent({
+  c,
+  prop,
+  checkedInMeal,
+  checkingInMeal,
+}) {
+  // idea: lock checkboxes of meal cards unless unlocked with button
   return (
     <div
       key={prop}
@@ -101,10 +113,16 @@ export function TextlessSingleContent({ c, prop, checkedInMeal }) {
             className="checkbox"
             type="checkbox"
             checked
+            onChange={checkingInMeal}
             id={prop.trim()}
           ></input>
         ) : (
-          <input className="checkbox" type="checkbox" id={prop.trim()}></input>
+          <input
+            className="checkbox"
+            type="checkbox"
+            onChange={checkingInMeal}
+            id={prop.trim()}
+          ></input>
         )}
       </div>
       <div>
@@ -116,7 +134,8 @@ export function TextlessSingleContent({ c, prop, checkedInMeal }) {
   );
 }
 
-export function MultiContent({ c, contentIndex, contents }) {
+export function MultiContent({ c, contentIndex, contents, radioed }) {
+  const randu = Math.random();
   return (
     <div
       key={`${c[Object.keys(c)[0]]}${c[Object.keys(c)[0]]}`}
@@ -126,12 +145,23 @@ export function MultiContent({ c, contentIndex, contents }) {
         {Object.keys(c).map((kc, i) => {
           return (
             <div id={`${kc}0`}>
-              <input
-                className="checkbox"
-                type="radio"
-                id={kc}
-                name={`c${contents[contentIndex]}`}
-              ></input>
+              {radioed ? (
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id={kc}
+                  checked
+                  name={`c${contents[contentIndex]}}${randu}`}
+                ></input>
+              ) : (
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id={kc}
+                  name={`c${contents[contentIndex]}${randu}`}
+                ></input>
+              )}
+
               <label htmlFor={kc}>{kc}</label>
             </div>
           );
